@@ -43,7 +43,7 @@ Context Optimization/
 ## Requirements
 
 - Python 3.11+
-- Groq API key (free inference via api.groq.com)
+- OpenRouter API key (free models available at openrouter.ai)
 - Packages: `openai`, `pandas`, `numpy`, `plotly`, `scikit-learn`, `pypdf`, `llmlingua`
 
 ## Test Question
