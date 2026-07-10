@@ -1,0 +1,72 @@
+====================================================================================================
+BENCHMARK RESULTS
+====================================================================================================
+Query: What is the exact projected infrastructure capital expenditure for Q3 2026, and what two specific factors (one expense and one offset) contribute to this financial change?
+
+
+────────────────────────────────────────────────────────────────────────────────
+Method: Raw Baseline
+  Context: 11255 tokens (0.0% compressed)
+  Billed: 18085 in / 61 out | Latency: 4.471s
+  Answer: The exact projected infrastructure capital expenditure for Q3 2026 is $14.73 million. This is due to the unexpected expansion of the secure server farm in Frankfurt to comply with EU AI Act data residency requirements, partially offset by a $2.1 million green energy tax rebate.
+
+────────────────────────────────────────────────────────────────────────────────
+Method: Naive Regex
+  Context: 2801 tokens (75.11% compressed)
+  Billed: 3273 in / 51 out | Latency: 3.508s
+  Answer: The exact projected infrastructure capital expenditure for Q3 2026 is not provided. One specific factor contributing to capital expenditure is increased compute demands, specifically surrounding vector database hosting. No specific offset contributing to this financial change is mentioned in the...
+
+────────────────────────────────────────────────────────────────────────────────
+Method: Semantic Chunk
+  Context: 1872 tokens (83.37% compressed)
+  Billed: 1881 in / 67 out | Latency: 2.61s
+  Answer: The exact projected infrastructure capital expenditure for Q3 2026 is $14.73 million. This financial change is due to the unexpected expansion of the secure server farm in Frankfurt to comply with EU AI Act data residency requirements, and it will be partially offset by a $2.1 million green...
+
+────────────────────────────────────────────────────────────────────────────────
+Method: LLMLingua
+  Context: 1170 tokens (89.6% compressed)
+  Billed: 1184 in / 79 out | Latency: 2.879s
+  Answer: The exact projected infrastructure capital expenditure for Q3 2026 is $14.73 million. The two specific factors contributing to this financial change are: 1. **Expense:** Unexpected expansion of the secure server farm in Frankfurt to comply with EU AI Act data residency requirements. 2....
+
+====================================================================================================
+GOLD STANDARD (Expected):
+  Q3 2026 infra CAPEX = $14.73M
+  Expense: Frankfurt server farm expansion for EU AI Act data residency
+  Offset: $2.1M green energy tax rebate
+
+
+# After updating naive Regex
+
+====================================================================================================
+BENCHMARK RESULTS
+====================================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+Method: Raw Baseline
+  Context: 11255 tokens (0.0% compressed)
+  Billed: 18085 in / 61 out | Latency: 3.646s
+  Answer: The projected infrastructure capital expenditure for Q3 2026 is $14.73 million. This is due to the expansion of the secure server farm in Frankfurt to comply with EU AI Act data residency requirements, which is partially offset by a $2.1 million green energy tax rebate.
+
+────────────────────────────────────────────────────────────────────────────────
+Method: Naive Regex
+  Context: 872 tokens (92.25% compressed)
+  Billed: 1087 in / 67 out | Latency: 1.526s
+  Answer: The projected infrastructure capital expenditure for Q3 2026 is $14.73 million. This spike is due to the unexpected expansion of the secure server farm in Frankfurt to comply with EU AI Act data residency requirements, which increases compute demands for vector database hosting. The context does...
+
+────────────────────────────────────────────────────────────────────────────────
+Method: Semantic Chunk
+  Context: 1872 tokens (83.37% compressed)
+  Billed: 1881 in / 66 out | Latency: 1.429s
+  Answer: The projected infrastructure capital expenditure for Q3 2026 is exactly $14.73 million. This spike is due to the unexpected expansion of the secure server farm in Frankfurt to comply with EU AI Act data residency requirements. This cost will be partially offset by a $2.1 million green energy tax...
+
+────────────────────────────────────────────────────────────────────────────────
+Method: LLMLingua
+  Context: 1170 tokens (89.6% compressed)
+  Billed: 1184 in / 65 out | Latency: 1.345s
+  Answer: The exact projected infrastructure capital expenditure for Q3 2026 is $14.73 million. This spike is due to the expansion of the secure server farm in Frankfurt to comply with EU AI Act data residency requirements. This cost will be partially offset by a $2.1 million green energy tax rebate.
+
+====================================================================================================
+GOLD STANDARD (Expected):
+  Q3 2026 infra CAPEX = $14.73M
+  Expense: Frankfurt server farm expansion for EU AI Act data residency
+  Offset: $2.1M green energy tax rebate

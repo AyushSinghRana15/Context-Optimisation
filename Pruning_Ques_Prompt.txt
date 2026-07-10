@@ -1,0 +1,11 @@
+Specific Question for Your Pruning Lab
+To test your Context Engineering and Pruning lab, you need a "needle in a haystack" question. I have buried a very specific data point in a paragraph about European data compliance on Page 4 of the document.
+
+Ask your LLM this exact question against the pruned document:
+
+"What is the exact projected infrastructure capital expenditure for Q3 2026, and what two specific factors (one expense and one offset) contribute to this financial change?"
+
+The Gold Standard Answer should be:
+The projected Q3 2026 infrastructure capital expenditure is exactly $14.73 million. This spike is due to the expansion of a secure server farm in Frankfurt to comply with EU AI Act data residency requirements, and it is partially offset by a $2.1 million green energy tax rebate.
+
+If your pruning algorithm is too aggressive (like naive stop-word removal or poor chunking), the LLM will miss the $14.73 million figure or fail to connect it to the Frankfurt server farm and the tax rebate
