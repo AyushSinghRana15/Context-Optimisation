@@ -1,32 +1,35 @@
 # Naive Regex Pruning
 
-A simple keyword-based sentence filtering approach for context compression.
+A keyword-based sentence filtering approach — the simplest form of context compression. It selects only the sentences containing words that match the user's question.
 
-## How It Works
+## Tech Stack
 
-1. **Tokenize** the document into sentences
-2. **Extract keywords** from the user's question (excluding common stop words)
-3. **Score each sentence** by counting how many question keywords it contains
-4. **Keep top sentences** that match at least one keyword (up to a configurable limit)
+| Component | Technology |
+|-----------|-----------|
+| Language | Python 3.11+ |
+| Parsing | `re` (regex) — standard library |
+| Dependencies | None (zero external ML deps) |
+| Runtime | Jupyter / Colab |
 
-## Trade-offs
+## Approach
 
-| Pros | Cons |
-|------|------|
-| Fast - no ML dependencies | May miss semantically relevant but lexically different sentences |
-| Simple to understand and debug | Stop word list is language-specific |
-| Deterministic output | Keyword matching is surface-level |
+1. **Split** the document into sentences using regex (`(?<=[.!?])\s+`)
+2. **Extract keywords** from the user's question — keep alphanumeric words of 3+ characters, filter out common stop words
+3. **Score** each sentence by counting how many question keywords appear (case-insensitive)
+4. **Filter** — keep only sentences with at least one keyword match
+5. **Cap** results to `max_sentences` (default 30)
+6. **Fallback** — if no keywords match, return the first N sentences
 
-## Usage
+## Functionalities
 
-```python
-from naive_regex_prune import naive_regex_prune
+- **Keyword extraction**: Automatically extracts meaningful terms from any user question
+- **Stop word filtering**: Removes ~35 common English words (the, is, at, which, what, etc.)
+- **Sentence scoring**: Ranks sentences by keyword match count (descending)
+- **Max cap**: Limits output size to prevent oversized context (configurable)
+- **Fallback mode**: Returns document start if no keywords match anywhere
 
-context = naive_regex_prune(document_text, question, max_sentences=30)
-```
+## Limitations
 
-## Parameters
-
-- `text` (str): The full document text
-- `question` (str): The user's query
-- `max_sentences` (int, default=30): Maximum sentences to keep
+- Purely lexical — "car" and "vehicle" are different keywords
+- Stop word list is English-only and hardcoded
+- Ordering is by relevance score, not original document position

@@ -1,37 +1,36 @@
 # LLMLingua Integration
 
-Neural prompt compression using Microsoft's LLMLingua-2 for structured token reduction.
+Neural prompt compression using Microsoft's LLMLingua-2. A trained transformer model removes redundant tokens while preserving question-critical information — the most sophisticated compression method in the toolkit.
 
-## How It Works
+## Tech Stack
 
-1. **Load the LLMLingua-2 model** (`microsoft/llmlingua-2-bert-base-multilingual-cased-meetingbank`)
-2. **Format the input** as a context + instruction + question bundle
-3. **Compress to target token budget** while preserving answer-critical information
-4. **Fallback to semantic pruning** if LLMLingua is unavailable or fails
+| Component | Technology |
+|-----------|-----------|
+| Language | Python 3.11+ |
+| Compression model | `microsoft/llmlingua-2-bert-base-multilingual-cased-meetingbank` |
+| Library | `llmlingua` (PromptCompressor) |
+| Hardware | CPU (fallback) / GPU recommended |
+| Runtime | Jupyter / Colab |
 
-## Trade-offs
+## Approach
 
-| Pros | Cons |
-|------|------|
-| Neural compression preserves meaning | Requires GPU for optimal speed |
-| Can achieve 65%+ compression | Model download required (~400MB) |
-| Handles complex dependencies | Slower than regex/semantic methods |
+1. **Compute budget** — target tokens = `max(200, total_tokens * target_ratio)`
+2. **Format input** as a structured bundle: instruction + context + question
+3. **Compress** via `PromptCompressor.compress_prompt()` — the model scores each token by importance and drops low-value ones
+4. **Extract** compressed text from the response
+5. **Hard-cap** output to `target_words` for fair comparison
+6. **Fallback** — if LLMLingua is unavailable, falls back to semantic chunk pruning
 
-## Usage
+## Functionalities
 
-```python
-from llmlingua_prune import llmlingua_prune
+- **Token-level compression**: Removes redundant words, not just sentences or chunks
+- **Question-aware**: Compression is guided by the specific question being asked
+- **Configurable ratio**: `target_ratio` controls how aggressive the compression is (0.35 = keep 35%)
+- **Graceful fallback**: Degrades to semantic chunk pruning if the model isn't installed
+- **Latent understanding**: The model understands which tokens are critical for QA, not just frequency-based importance
 
-context = llmlingua_prune(document_text, question, target_ratio=0.35)
-```
+## Limitations
 
-## Parameters
-
-- `text` (str): The full document text
-- `question` (str): The user's query
-- `target_ratio` (float, default=0.35): Target compression ratio (0.35 = keep 35% of tokens)
-
-## Requirements
-
-- `llmlingua` package (`pip install llmlingua`)
-- Falls back to semantic chunk pruning if unavailable
+- Requires downloading the model (~400MB) on first run
+- Slowest method — each call is a forward pass through BERT
+- CPU inference can be 2-5x slower than the other methods

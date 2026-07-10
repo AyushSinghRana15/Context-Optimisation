@@ -1,44 +1,43 @@
 # Context Optimization
 
-A comprehensive toolkit for context engineering and prompt compression techniques for LLMs.
-
-## Overview
-
-This project explores various strategies for optimizing the context window sent to Large Language Models. As context windows grow larger, simply stuffing them with all available data leads to performance degradation (context distraction, context clash). This toolkit provides benchmarking tools and implementations for three prompt compression methods.
+A toolkit for context engineering and prompt compression in LLM applications. Benchmarks three compression methods against a raw baseline, measuring both efficiency (tokens, latency, cost) and quality (LLM-as-a-Judge scoring).
 
 ## Project Structure
 
 ```
 Context Optimization/
-├── Adv1_Context_Quarantine.md          # Guide on Context Quarantine with LangGraph
-├── Pruning_Ques_Prompt.txt            # Needle-in-haystack test question
-├── context_engineering_pruning_dashboard.ipynb  # Main benchmark notebook
-├── nexus_Q2_earnings_projections.pdf  # Sample document for testing
-├── results.txt                        # Benchmark results
-├── naive_regex_pruning/
+├── Adv1_Context_Quarantine.md                    # Context Quarantine guide (LangGraph)
+├── Pruning_Ques_Prompt.txt                       # Needle-in-haystack test question
+├── context_engineering_pruning_dashboard.ipynb   # Main benchmark notebook
+├── nexus_Q2_earnings_projections.pdf             # Sample test document
+├── results.txt                                   # Benchmark results
+│
+├── naive_regex_pruning/          # Simplest: keyword sentence filtering
 │   ├── README.md
-│   └── naive_regex_pruning.ipynb      # Keyword-based sentence filtering
-├── semantic_chunk_pruning/
+│   └── naive_regex_pruning.ipynb
+│
+├── semantic_chunk_pruning/       # Intermediate: TF-IDF chunk ranking
 │   ├── README.md
-│   └── semantic_chunk_pruning.ipynb   # TF-IDF cosine similarity ranking
-└── llmlingua/
+│   └── semantic_chunk_pruning.ipynb
+│
+└── llmlingua/                    # Advanced: neural token compression
     ├── README.md
-    └── llmlingua.ipynb                # Neural prompt compression
+    └── llmlingua.ipynb
 ```
 
-## Compression Methods
+## Method Comparison
 
-| Method | Approach | Speed | Quality |
-|--------|----------|-------|---------|
-| **Naive Regex** | Keyword-based sentence filtering | Fast | Basic |
-| **Semantic Chunk** | TF-IDF cosine similarity ranking | Medium | Good |
-| **LLMLingua** | Neural prompt compression (LLMLingua-2) | Slow | Best |
+| Method | Approach | Tech | Speed | Quality |
+|--------|----------|------|-------|---------|
+| **Naive Regex** | Keyword sentence filtering | `re` (stdlib) | Fastest | Basic |
+| **Semantic Chunk** | TF-IDF + cosine similarity | `scikit-learn` | Medium | Good |
+| **LLMLingua** | Neural token compression | `microsoft/llmlingua-2` | Slowest | Best |
 
 ## Getting Started
 
 1. Open `context_engineering_pruning_dashboard.ipynb` in Google Colab or Jupyter
 2. Run all setup cells
-3. Upload a document and enter your question
+3. Upload a document and enter a question
 4. Click **Run Full Benchmark**
 
 ## Requirements
@@ -48,8 +47,6 @@ Context Optimization/
 - Packages: `openai`, `pandas`, `numpy`, `plotly`, `scikit-learn`, `pypdf`, `llmlingua`
 
 ## Test Question
-
-The included test question targets a specific data point buried in the PDF:
 
 > "What is the exact projected infrastructure capital expenditure for Q3 2026, and what two specific factors (one expense and one offset) contribute to this financial change?"
 
