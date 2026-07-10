@@ -43,7 +43,7 @@ Context Optimization/
 ## Requirements
 
 - Python 3.11+
-- xAI API key (for Grok LLM via api.x.ai)
+- Groq API key (free inference via api.groq.com)
 - Packages: `openai`, `pandas`, `numpy`, `plotly`, `scikit-learn`, `pypdf`, `llmlingua`
 
 ## Test Question
