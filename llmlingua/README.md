@@ -1,13 +1,13 @@
 # LLMLingua Integration
 
-Neural prompt compression using Microsoft's LLMLingua-2. A trained transformer model removes redundant tokens while preserving question-critical information — the most sophisticated compression method in the toolkit.
+Neural prompt compression using Microsoft's LLMLingua-2 (XLM-RoBERTa variant). A trained transformer model removes redundant tokens while preserving question-critical information — the most sophisticated compression method in the toolkit.
 
 ## Tech Stack
 
 | Component | Technology |
 |-----------|-----------|
 | Language | Python 3.11+ |
-| Compression model | `microsoft/llmlingua-2-bert-base-multilingual-cased-meetingbank` |
+| Compression model | `microsoft/llmlingua-2-xlm-roberta-large-meetingbank` |
 | Library | `llmlingua` (PromptCompressor) |
 | Hardware | CPU (fallback) / GPU recommended |
 | Runtime | Jupyter / Colab |

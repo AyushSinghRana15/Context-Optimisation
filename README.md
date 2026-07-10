@@ -31,7 +31,7 @@ Context Optimization/
 |--------|----------|------|-------|---------|
 | **Naive Regex** | Keyword sentence filtering | `re` (stdlib) | Fastest | Basic |
 | **Semantic Chunk** | TF-IDF + cosine similarity | `scikit-learn` | Medium | Good |
-| **LLMLingua** | Neural token compression | `microsoft/llmlingua-2` | Slowest | Best |
+| **LLMLingua** | Neural token compression (XLM-RoBERTa) | `microsoft/llmlingua-2-xlm-roberta-large` | Slowest | Best |
 
 ## Getting Started
 
@@ -43,7 +43,7 @@ Context Optimization/
 ## Requirements
 
 - Python 3.11+
-- Google API key (for Gemini LLM)
+- xAI API key (for Grok LLM via api.x.ai)
 - Packages: `openai`, `pandas`, `numpy`, `plotly`, `scikit-learn`, `pypdf`, `llmlingua`
 
 ## Test Question
